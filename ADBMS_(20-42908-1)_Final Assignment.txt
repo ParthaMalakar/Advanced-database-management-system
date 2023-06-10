@@ -1,0 +1,109 @@
+                                                                             Name:Partha Malakar
+                                                                             Id:20-42908-1
+                                                                             Section:A
+                                                                             Course:ADVABNCED DATABASE MANAGEMENT SYSTEM
+                                                                             Final Assignment
+
+Answer1:
+
+declare
+d_no SStudent.SNUM %type:=:SNUM;
+a number(4);
+begin
+select sum(CRHR) into a from cource where CNUM in(select C# from enroll where S# = d_no);
+if(a>=0 or a<=30) then
+update SStudent set STANDING = 1 where SNUM=d_no;
+elsif(a>=31 or a<=60) then
+update SStudent set STANDING = 2 where SNUM=d_no;
+elsif(a>=61 or a<=90) then
+update SStudent set STANDING = 3 where SNUM=d_no;
+elsif(a>91) then
+update SStudent set STANDING = 4 where SNUM=d_no;
+end if;
+end;select * from SStudent
+
+Answer2:
+
+create or replace procedure AddCourse(psnum in SStudent.SNUM%type,pcnum in Cource.CNUM%type)
+is
+A number(2);
+B number(2);
+C number(2);
+D number(2);
+begin
+A:=checkValidStudent(psnum);
+B:=checkValidCourse(pcnum);
+C:=CheckStanding(snum,cnum);
+D:=checkClassCapacity(cnum);
+if(A=0 and B=0 and C=0 and D=0) then
+Insert into enroll values(3,psnum ,pcnum,' ');
+dbms_output.put_line('inserted');
+else
+dbms_output.put_line('invalid');
+endif;
+end;
+
+create or replace function checkValidStudent(psnum in sstudent.SNUM%type)
+return number 
+cursor c1
+is
+i number;
+begin
+for i in c1 loop
+if (i.SNUM = psnum) then
+return 1;
+else 
+return 0;
+endif;
+end loop;
+end;
+
+create or replace function checkValidCourse(pcnum in cource.CNUM%type)
+return number
+is 
+cursor c1;
+i number;
+begin
+for i in c1 loop
+if (i.CNUM = pcnum) then
+return 1;
+else 
+return 0;
+endif;
+end loop;
+end;
+
+create or replace function CheckStanding(psnum in sstudent.SNUM%type,pcnum in cource.CNUM%type)
+return number
+is 
+e SStudent.STANDING%type;
+m Cource.STANDING%type;
+begin
+select Standing into e from SStudent where SNUM=psnum;
+select Standing into m from Cource where CNUM=pcnum;
+if (e=m) then
+return 1;
+else 
+return 0;
+endif;
+end;
+
+create or replace function checkClassCapacity(pcnum in cource.CNUM%type)
+return number
+is 
+a number(4);
+begin
+select sum(CRHR) into a from cource where CNUM in(select C# from enroll where S# = 111);
+if (a<15) then
+return 1;
+else 
+return 0;
+endif;
+end;
+
+declare
+psnum SStudent.SNUM %type:=:SNUM;
+pcnum Cource.CNUM %type:=:CNUM;
+begin
+AddCourse(psnum,pcnum);
+end;

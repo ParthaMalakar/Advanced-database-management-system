@@ -7,18 +7,19 @@ include "../Controller/SignUpCheck.php";
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:700,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../CSS/SignUp.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        table, th, td {border: none; }
-        table {background-color: powderblue;}
-        h2   {color: green;}
-        p    {color: red;}
+        table, th, td {
+          border: none;
+        }
         </style>
     <title>SIGNUP</title>
 </head>
 
 <body>
-    <div>
+    <div class="box">
         <form action="#" method="post">
         <h2 align="center"><b><u>SIGNUP</u></b></h2>
     	<br>
@@ -53,7 +54,7 @@ include "../Controller/SignUpCheck.php";
               <tr>
                   <td> <label for="pass">Password:</label></td>
                   <td> <input type="Password" id="pass" name="pass" placeholder="Enter password" >
-                  <?php echo "<span style='color:red;'><small><b>".$passerr."</b></small></span>";?>
+
                   </td>
               </tr>
 
@@ -100,8 +101,8 @@ include "../Controller/SignUpCheck.php";
               <tr>
                 <td></td>
                 <td >
-                    <input type="submit" name="btnsignUp"  value="Signup">
-                    <input type="reset" name="Reset">
+                    <input id='btn1' type="submit" name="btnsignUp"  value="Signup">
+                    <input id='btn2' type="reset" name="Reset">
                 </td>
               </tr>
               <tr><td></td><td></td></tr>
